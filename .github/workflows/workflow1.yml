@@ -14,4 +14,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Run a script
         run: echo "Hello, self-hosted runner!"
+      
+      - name: Create a file
+        run: echo "This is an example file created by GitHub Actions on a self-hosted runner." > example.txt
+
+      - name: Verify file creation
+        run: cat example.txt
 
