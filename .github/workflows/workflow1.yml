@@ -16,7 +16,9 @@ jobs:
       - name: Run a script
         run: echo "Hello, self-hosted runner!"
       
-      - name: Copy the yml files into Master Node
+      - name: Copy Service-deploy to remote server
         run: |
-          scp -o /home/ubuntu/cloud-creds/git-runner.pem $GITHUB_WORKSPACE/Service-deploy ubuntu@10.0.0.18:/home/ubuntu/
+          scp -i /home/ubuntu/cloud-creds/git-runner.pem $GITHUB_WORKSPACE/Service-deploy ubuntu@10.0.0.18:/home/ubuntu/
+        shell: /usr/bin/bash -e {0}
+
 
