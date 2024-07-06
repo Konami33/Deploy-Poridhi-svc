@@ -12,12 +12,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Run a script
         run: echo "Hello, self-hosted runner!"
       
-      - name: Create a file
-        run: echo "This is an example file created by GitHub Actions on a self-hosted runner." > example.txt
-
-      - name: Verify file creation
-        run: cat example.txt
+      - name: Copy the yml files into Master Node
+        run: |
+          scp -o /home/ubuntu/cloud-creds/git-runner.pem $GITHUB_WORKSPACE/Service-deploy ubuntu@10.0.0.18:/home/ubuntu/
 
