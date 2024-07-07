@@ -21,13 +21,11 @@ jobs:
 
       - name: Setup Ansible
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ env.GIT_RUNNER_IP }} << 'EOF'
           sudo apt-get update -y
           sudo apt install software-properties-common -y
           sudo apt-add-repository --yes --update ppa:ansible/ansible
           sudo apt-get install -y ansible
           ansible --version
-          EOF
 
       # - name: SSH into Master node and Run the deployent file
       #   run: |
