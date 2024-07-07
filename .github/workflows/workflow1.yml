@@ -19,4 +19,5 @@ jobs:
       - name: Move file to home directory
         run: mv $GITHUB_WORKSPACE/Service-deploy ~/
 
-
+      - name: scp 
+        run:  scp -i /home/ubuntu/cloud-creds/git-runner.pem -r ~/Service-deploy ubuntu@10.0.0.18:/home/ubuntu/
