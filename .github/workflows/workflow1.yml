@@ -21,3 +21,10 @@ jobs:
 
       - name: scp 
         run:  scp -i /home/ubuntu/cloud-creds/git-runner.pem -r ~/Service-deploy ubuntu@10.0.0.18:/home/ubuntu/
+
+      - name: SSH into Master node and Run the deployent file
+        run: |
+          ssh -i ~/cloud-creds/git-runner.pem ubuntu@10.0.0.18 <<  'EOF'
+          sudo apt-get update -y
+          kubectl apply -f nginx-pod.yml
+          EOF
