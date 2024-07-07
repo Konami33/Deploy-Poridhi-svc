@@ -26,5 +26,6 @@ jobs:
         run: |
           ssh -i ~/cloud-creds/git-runner.pem ubuntu@10.0.0.18 <<  'EOF'
           sudo apt-get update -y
+          cd Service-deploy
           kubectl apply -f nginx-pod.yml
           EOF
