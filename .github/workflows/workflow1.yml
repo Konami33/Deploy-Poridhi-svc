@@ -1,4 +1,4 @@
-name: Demo action
+name: Initial setup
 
 on:
   push:
@@ -12,20 +12,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Run a script
-        run: echo "Hello, self-hosted runner!"
       
-      - name: Copy Service-deploy directory contents to home
-        run: cp -r $GITHUB_WORKSPACE/Service-deploy/* ~/Service-deploy/
+      # - name: Copy Service-deploy directory contents to home
+      #   run: cp -r $GITHUB_WORKSPACE/Service-deploy/* ~/Service-deploy/
 
-      - name: scp 
-        run:  scp -i /home/ubuntu/cloud-creds/git-runner.pem -r ~/Service-deploy ubuntu@10.0.0.18:/home/ubuntu/
+      # - name: Copy the deployments file into the master node
+      #   run:  scp -i /home/ubuntu/cloud-creds/git-runner.pem -r ~/Service-deploy ubuntu@10.0.0.18:/home/ubuntu/
 
-      - name: SSH into Master node and Run the deployent file
+      - name: Setup Ansible
         run: |
-          ssh -i ~/cloud-creds/git-runner.pem ubuntu@10.0.0.18 <<  'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ env.GIT_RUNNER_IP }} << 'EOF'
           sudo apt-get update -y
-          cd Service-deploy
-          kubectl apply -f nginx-pod.yml
+          sudo apt install software-properties-common -y
+          sudo apt-add-repository --yes --update ppa:ansible/ansible
+          sudo apt-get install -y ansible
+          ansible --version
           EOF
+
+      # - name: SSH into Master node and Run the deployent file
+      #   run: |
+      #     ssh -i ~/cloud-creds/git-runner.pem ubuntu@10.0.0.18 <<  'EOF'
+      #     sudo apt-get update -y
+      #     cd Service-deploy
+      #     kubectl apply -f nginx-pod.yml
+      #     EOF
