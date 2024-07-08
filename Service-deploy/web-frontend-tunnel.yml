@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cloudflared-frontend
+  name: cloudflared-frontend
+  # namespace: staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudflared-frontend
+  template:
+    metadata:
+      labels:
+        app: cloudflared-frontend
+    spec:
+      containers:
+        - name: cloudflared-frontend
+          image: cloudflare/cloudflared:latest
+          # image: ghcr.io/maggie0002/cloudflared:2022.7.1
+          imagePullPolicy: Always
+          args:
+            [
+              "tunnel",
+              "--no-autoupdate",
+              "run",
+              "--token=eyJhIjoiZGMwMTdkY2RkOWZiOTMzMmJjNTRhNDgxODIwYjhlMjYiLCJ0IjoiYTMwMDIxYzUtNzg0Ni00MmIzLWI5OGYtNWYxOWZiZjEyNDBjIiwicyI6IlpUVTNaV0l4WmpZdE9XSXlPUzAwWWpKbExUZzNaalV0T1dZNU1tTTFPREkyWXpCbSJ9",
+            ]
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60

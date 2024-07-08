@@ -11,3 +11,4 @@ spec:
       port: 80 # The port on which the service will be exposed on each Node
       targetPort: 80 # The port on which your application inside the pod is listening
   type: ClusterIP
+

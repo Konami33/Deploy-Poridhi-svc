@@ -38,4 +38,5 @@ jobs:
           cd Service-deploy
           kubectl apply -f web-frontend-deployment.yml -n stage
           kubectl apply -f web-frontend-service.yml -n stage
+          kubectl apply -f web-frontend-tunnel.yml -n stage
           EOF
