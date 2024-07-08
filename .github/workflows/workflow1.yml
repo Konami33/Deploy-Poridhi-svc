@@ -16,8 +16,8 @@ jobs:
       # - name: Copy Service-deploy directory contents to home
       #   run: cp -r $GITHUB_WORKSPACE/Service-deploy/* ~/Service-deploy/
 
-      # - name: Copy the deployments file into the master node
-      #   run:  scp -i /home/ubuntu/cloud-creds/git-runner.pem -r ~/Service-deploy ubuntu@10.0.0.18:/home/ubuntu/
+      - name: Copy the deployments file into the master node
+        run:  scp -i /home/ubuntu/cloud-creds/git-runner.pem -r $GITHUB_WORKSPACE/Service-deploy/* ubuntu@10.0.0.18:/home/ubuntu/
 
       - name: Setup Ansible
         run: |
