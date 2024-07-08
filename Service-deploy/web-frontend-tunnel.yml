@@ -25,7 +25,7 @@ spec:
               "tunnel",
               "--no-autoupdate",
               "run",
-              "--token=eyJhIjoiZGMwMTdkY2RkOWZiOTMzMmJjNTRhNDgxODIwYjhlMjYiLCJ0IjoiYTMwMDIxYzUtNzg0Ni00MmIzLWI5OGYtNWYxOWZiZjEyNDBjIiwicyI6IlpUVTNaV0l4WmpZdE9XSXlPUzAwWWpKbExUZzNaalV0T1dZNU1tTTFPREkyWXpCbSJ9",
+              "--token=eyJhIjoiZGMwMTdkY2RkOWZiOTMzMmJjNTRhNDgxODIwYjhlMjYiLCJ0IjoiOGIwZWVkYjktNWQxZS00YmI5LTljNjEtMTlkMWJhOTE2OTA0IiwicyI6Ik56azVOREJoTXpJdE1qTTRZaTAwWTJNM0xXRmlNREl0TVRNek5qQTFZakF6TnpkayJ9",
             ]
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
