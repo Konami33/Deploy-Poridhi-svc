@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - Service-deploy/**
 
 jobs:
   demo:
@@ -12,11 +14,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
-      # - name: Copy Service-deploy directory contents to home
-      #   run: cp -r $GITHUB_WORKSPACE/Service-deploy/* ~/Service-deploy/
 
-      - name: Copy the deployments file into the master node
+      - name: Copy the deployments file into the Master node
         run:  scp -i /home/ubuntu/cloud-creds/git-runner.pem -r $GITHUB_WORKSPACE/Service-deploy ubuntu@10.0.0.18:/home/ubuntu/
 
       - name: Setup Ansible
@@ -32,10 +31,11 @@ jobs:
           fi
           ansible --version
 
-      # - name: SSH into Master node and Run the deployent file
-      #   run: |
-      #     ssh -i ~/cloud-creds/git-runner.pem ubuntu@10.0.0.18 <<  'EOF'
-      #     sudo apt-get update -y
-      #     cd Service-deploy
-      #     kubectl apply -f nginx-pod.yml
-      #     EOF
+      - name: SSH into Master node and Run the deployent file
+        run: |
+          ssh -i ~/cloud-creds/git-runner.pem ubuntu@10.0.0.18 <<  'EOF'
+          sudo apt-get update -y
+          cd Service-deploy
+          kubectl apply -f web-frontend-deployment.yml -n stage
+          kubectl apply -f web-frontend-service.yml -n stage
+          EOF

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deploy
+  namespace: prod
+spec:
+  replicas: 1 # Set the number of replicas as needed
+  selector:
+    matchLabels:
+      app: frontend-pod
+  template:
+    metadata:
+      labels:
+        app: frontend-pod
+    spec:
+      containers:
+        - name: frontend
+          image: poridhi/web-frontend-v3:v2.137 # Replace with your container image and tag
+          env:
+            - name: VITE_COURSE_API_URL
+              value: https://course.poridhi.io
+            - name: VITE_AUTH_API_URL
+              value: https://auth.poridhi.io
+            - name: VITE_EXAM_API_URL
+              value: https://exam.poridhi.io
+            - name: VITE_FILE_API_URL
+              value: https://image.poridhi.io
+            - name: VITE_LAB_API_URL
+              value: https://api-vm.poridhi.io
+            - name: VITE_LABINFO_API_URL
+              value: https://lab-info.poridhi.io
+            - name: VITE_ZOOM_API_URL
+              value: https://zoom.poridhi.io
+            - name: VITE_PAYMENT_API_URL
+              value: https://pay.poridhi.io
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
